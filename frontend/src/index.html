@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enchufes Inteligentes</title>
+
+  <!-- Enlace al archivo de estilos CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sección de inicio de sesión -->
+  <div id="auth" class="login-box">
+    <h1><span class="login-icon">🔐</span> Enchufes inteligentes de casa</h1>
+    <p>Inicia sesión para poder controlar los enchufes inteligentes</p>
+
+    <!-- Campo para introducir el nombre de usuario -->
+    <input id="login-username" placeholder="Nombre de usuario" /><br />
+
+    <!-- Campo de contraseña con botón para mostrar/ocultar -->
+    <div class="password-wrapper">
+      <input id="login-password" type="password" placeholder="Contraseña" />
+      <span id="toggle-password" class="toggle-password">👁️‍🗨️</span>
+    </div>
+
+    <!-- Botón para iniciar sesión -->
+    <button onclick="login()">Iniciar sesión</button>
+  </div>
+
+  <!-- Interfaz principal que aparece tras iniciar sesión -->
+  <div id="app" style="display: none;">
+    <!-- Mensaje de bienvenida con nombre de usuario -->
+    <h2 class="welcome-title">Bienvenido, <span id="user-name"></span>!</h2>
+    <hr />
+    <p class="welcome-desc">Bienvenido a tu interfaz web para el control de tu enchufes</p>
+
+    <!-- Controles para los enchufes -->
+    <div class="plugs-container">
+      <!-- Control para el enchufe de la televisión -->
+      <div class="plug-box" id="plug-tele">
+        <h4>📺 Televisión</h4>
+        <button onclick="togglePlug('tele', true)">Encender</button>
+        <button onclick="togglePlug('tele', false)">Apagar</button>
+      </div>
+
+      <!-- Control para el enchufe de la luz -->
+      <div class="plug-box" id="plug-luz">
+        <h4>💡 Luz del salón</h4>
+        <button onclick="togglePlug('luz', true)">Encender</button>
+        <button onclick="togglePlug('luz', false)">Apagar</button>
+      </div>
+    </div>
+
+    <!-- Mensajes de estado tras acciones (encendido/apagado) -->
+    <pre id="status-message" class="status-message"></pre>
+
+    <hr />
+    
+    <!-- Sección para probar la conexión con el backend -->
+    <p class="ping-text">Aquí tienes un botón para probar si la conexión es correcta y saber si el control de enchufes funcionará:</p>
+    <div class="test-connection">
+      <button onclick="pingBackend()">Probar conexión</button>
+      <pre id="response"></pre>
+    </div>
+
+    <!-- Botón para cerrar sesión -->
+    <div class="logou

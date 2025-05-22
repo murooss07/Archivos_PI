@@ -1,0 +1,22 @@
+{
+  // Nombre del proyecto
+  "name": "frontend", // Pon el que quieras
+
+  // Versión del proyecto
+  "version": "1.0.0",
+
+  // Indica que este paquete no debe ser publicado en el registro de npm
+  "private": true,
+
+  // Scripts que se pueden ejecutar con npm (por ejemplo, npm start)
+  "scripts": {
+    // Inicia un servidor estático con `serve`, sirviendo la carpeta `src` en el puerto 3000
+    "start": "npx serve -s src -l 3000"
+  },
+
+  // Dependencias necesarias para que funcione la aplicación
+  "dependencies": {
+    // `serve` es un servidor estático para producción, útil para servir archivos HTML/CSS/JS
+    "serve": "^14.2.0"
+  }
+}

@@ -1,0 +1,166 @@
+/* Estilo general del cuerpo de la página */
+body {
+  font-family: sans-serif;
+  background-color: #e0f7fa; 
+  margin: 2rem;
+  color: #222; 
+}
+
+/* Encabezados centrados y con color */
+h1, h2, h3 {
+  color: #333;
+  text-align: center;
+}
+
+/* Ícono al lado del texto de inicio de sesión */
+.login-icon {
+  margin-right: 8px;
+}
+
+/* Contenedor del formulario de login */
+.login-box {
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  text-align: center;
+}
+
+/* Contenedor para el campo de contraseña e ícono de mostrar/ocultar */
+.password-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0.5rem auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo del input dentro del contenedor de contraseña */
+.password-wrapper input {
+  flex: 1;
+  padding: 0.5rem;
+  padding-right: 2rem; 
+  box-sizing: border-box;
+}
+
+/* Estilo del ícono para mostrar/ocultar contraseña */
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Estilo general para los inputs */
+input {
+  width: 90%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+/* Estilo general para botones */
+button {
+  background-color: #3b82f6; 
+  color: white;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Efecto hover para botones */
+button:hover {
+  background-color: #2563eb;
+}
+
+/* Contenedor principal de la aplicación */
+#app {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Título de bienvenida */
+.welcome-title {
+  margin-bottom: 0.5rem;
+}
+
+/* Descripción debajo del título de bienvenida */
+.welcome-desc {
+  text-align: left;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+}
+
+/* Línea divisoria entre secciones */
+hr {
+  margin: 1.5rem 0;
+  border: 1px solid #ccc;
+}
+
+/* Texto junto al botón de probar conexión */
+.ping-text {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+/* Contenedor de los cuadros de enchufes */
+.plugs-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap; /* Permite ajustar en pantallas pequeñas */
+}
+
+/* Estilo de cada cuadro de enchufe */
+.plug-box {
+  flex: 1;
+  min-width: 250px;
+  padding: 1rem;
+  background-color: #ffe4e1; 
+  border: 2px solid red;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 0.3s, border-color 0.3s; 
+}
+
+/* Estilo cuando el enchufe está encendido */
+.plug-box.on {
+  background-color: #d1fae5; 
+  border-color: green;
+}
+
+/* Mensaje de estado general (encendido/apagado) */
+.status-message {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+/* Color del mensaje si fue exitoso */
+.status-success {
+  color: green;
+}
+
+/* Color del mensaje si hubo error */
+.status-error {
+  color: red;
+}
+
+/* Estilo del mensaje de prueba de conexión */
+.test-connection {
+  margin-top: 1rem;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+/* Contenedor para el botón de cerrar sesión */
+.logout {
+  margin-top: 2rem;
+  text-align: center;
+}

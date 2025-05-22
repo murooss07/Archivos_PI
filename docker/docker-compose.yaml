@@ -1,0 +1,49 @@
+version: '3.8'  
+
+services:
+  # Servicio del backend 
+  backend:
+    restart: always  # Reinicia el contenedor si se detiene
+    build: ./backend  # Construye la imagen desde el Dockerfile en la carpeta ./backend
+    ports:
+      - "8000:8000"  # Expone el puerto 8000 en el host al 8000 del contenedor
+    environment:
+      - DB_URL=postgresql://usuario:contraseña@db:5432/enchufes  # URL de conexión a la base de datos PostgreSQL
+    depends_on:
+      - db  # Este servicio depende de que la base de datos esté disponible primero
+
+  # Servicio del frontend 
+  frontend:
+    restart: always  
+    build: ./frontend  # Construye la imagen desde la carpeta ./frontend
+    ports:
+      - "3000:3000"  # Expone el puerto 3000 en el host al 3000 del contenedor
+    depends_on:
+      - backend  # Este servicio depende de que el backend esté levantado
+
+  # Servicio de la base de datos PostgreSQL
+  db:
+    restart: always  
+    image: postgres:15  # Usa la imagen oficial de PostgreSQL versión 15
+    environment:
+      POSTGRES_DB: enchufes  # Nombre de la base de datos
+      POSTGRES_USER: usuario  # Usuario de la base de datos (reemplazar por el que quieras)
+      POSTGRES_PASSWORD: contraseña  # Contraseña del usuario (reemplazar por una que quieras)
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persistencia de datos en volumen llamado db_data
+
+  # Servicio de pgAdmin (interfaz web para gestionar PostgreSQL)
+  pgadmin:
+    restart: always  
+    image: dpage/pgadmin4  # Usa la imagen oficial de pgAdmin 4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Correo de acceso a pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin  # Contraseña de acceso a pgAdmin
+    ports:
+      - "5050:80"  # Expone el puerto 5050 en el host al 80 del contenedor
+    depends_on:
+      - db  # Requiere que la base de datos esté disponible primero
+
+# Volúmenes persistentes
+volumes:
+  db_data:  # Volumen para almacenar los datos de PostgreSQL

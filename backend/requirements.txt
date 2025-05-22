@@ -1,0 +1,7 @@
+fastapi             # Framework web moderno y rápido para construir APIs 
+uvicorn             # Servidor ASGI ligero y rápido para ejecutar aplicaciones FastAPI
+sqlalchemy          # ORM (Object-Relational Mapper) para interactuar con bases de datos relacionales usando objetos de Python
+psycopg2-binary     # Driver de PostgreSQL para Python; permite conectarse y operar con bases de datos PostgreSQL
+python-jose         # Implementación de JOSE (JSON Object Signing and Encryption), usada para crear y verificar tokens JWT
+bcrypt              # Biblioteca para hashear y verificar contraseñas de forma segura
+tinytuya            # Biblioteca para controlar dispositivos inteligentes Tuya (enchufes, luces, etc.) desde Python

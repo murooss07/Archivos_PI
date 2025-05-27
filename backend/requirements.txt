@@ -5,3 +5,4 @@ psycopg2-binary     # Driver de PostgreSQL para Python; permite conectarse y ope
 python-jose         # Implementación de JOSE (JSON Object Signing and Encryption), usada para crear y verificar tokens JWT
 bcrypt              # Biblioteca para hashear y verificar contraseñas de forma segura
 tinytuya            # Biblioteca para controlar dispositivos inteligentes Tuya (enchufes, luces, etc.) desde Python
+pytz                # Biblioteca para manejo de zonas horarias en Python

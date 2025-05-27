@@ -1,6 +1,5 @@
 # Importación de librerías necesarias
 import bcrypt
-import datetime
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +7,8 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from jose import jwt, JWTError
 from pydantic import BaseModel
+import datetime
+import pytz
 from control_enchufes import switch_device
 
 # Configuración del token JWT
@@ -100,13 +101,18 @@ def verify_password(contrasena_plana: str, contrasena_hash: str):
 
 # Crea un registro de acceso en la base de datos con IP e información del usuario
 def create_access_log(db, nombre_usuario, request, accion):
-    container_ip = request.client.host.strip()
-    x_forwarded_for = request.headers.get("X-Forwarded-For", container_ip)
+    container_ip = request.client.host.strip()  # IP del cliente visto desde el contenedor
+    x_forwarded_for = request.headers.get("X-Forwarded-For", container_ip) 
     real_ip = x_forwarded_for.split(",")[0].strip()
-
     ip_publica_usuario = real_ip if real_ip != container_ip else None
-    now = datetime.datetime.utcnow().replace(microsecond=0)
 
+    # Obtener la hora local
+    utc_now = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
+    madrid_tz = pytz.timezone("Europe/Madrid")
+    madrid_now = utc_now.astimezone(madrid_tz)
+    now = madrid_now.replace(tzinfo=None, microsecond=0)
+
+    # Crear y guardar el log en la base de datos
     log = AccessLog(
         nombre_usuario=nombre_usuario,
         ip_contenedor=container_ip,

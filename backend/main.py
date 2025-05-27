@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from jose import jwt, JWTError
 from pydantic import BaseModel
-import datetime
+from datetime import datetime, timedelta
 import pytz
 from control_enchufes import switch_device
 
@@ -67,7 +67,7 @@ def get_db():
 
 # Generación de un token JWT válido durante 1 hora
 def create_token(nombre_usuario):
-    expiration = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    expiration = datetime.utcnow() + timedelta(hours=1)
     to_encode = {"sub": nombre_usuario, "exp": expiration}
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
@@ -101,18 +101,17 @@ def verify_password(contrasena_plana: str, contrasena_hash: str):
 
 # Crea un registro de acceso en la base de datos con IP e información del usuario
 def create_access_log(db, nombre_usuario, request, accion):
-    container_ip = request.client.host.strip()  # IP del cliente visto desde el contenedor
-    x_forwarded_for = request.headers.get("X-Forwarded-For", container_ip) 
+    container_ip = request.client.host.strip()
+    x_forwarded_for = request.headers.get("X-Forwarded-For", container_ip)
     real_ip = x_forwarded_for.split(",")[0].strip()
     ip_publica_usuario = real_ip if real_ip != container_ip else None
 
-    # Obtener la hora local
-    utc_now = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
+# Obtener la hora local Europe/Madrid sin tzinfo y sin microsegundos
+    utc_now = datetime.utcnow().replace(tzinfo=pytz.UTC)
     madrid_tz = pytz.timezone("Europe/Madrid")
     madrid_now = utc_now.astimezone(madrid_tz)
     now = madrid_now.replace(tzinfo=None, microsecond=0)
 
-    # Crear y guardar el log en la base de datos
     log = AccessLog(
         nombre_usuario=nombre_usuario,
         ip_contenedor=container_ip,
